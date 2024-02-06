@@ -9,8 +9,10 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
         crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/listofdonor.css">
     <title>Homepage</title>
     <style>
+        /* Custom CSS to center content and add margin */
         .container {
             margin-left: auto;
             margin-right: auto;
@@ -20,7 +22,7 @@
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container mx-auto" style="max-width: 800px;">
             <h4 class="navbar-brand">Blood Finder</h4>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -40,7 +42,9 @@
                 </ul>
             </div>
             <div class="d-flex flex-column">
-                    {{#if username}}
+                {{!-- <a class="btn btn-primary btn-ig mb-2" href="/register">Give Blood</a>
+                <a class="nav-link" href="/login">Login</a> --}}
+                 {{#if username}}
                     <a class="btn btn-primary btn-ig mb-2" href="/register">{{username}}</a>
             
                 {{else}}
@@ -53,32 +57,12 @@
             {{else}}
             <a class="nav-link" href="/login">Login</a>
         {{/if}}
+        
             </div>
         </div>
     </nav>
 
-     {{#if message}}
-            <h4 class="alert alert-success mt-4">{{message}}</h4>
-        {{/if}}
-
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-6">
-                <img src="https://via.placeholder.com/400" alt="Image" class="img-fluid">
-            </div>
-            <div class="col-md-6">
-                <h5>Project Overview</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus excepturi sint, quisquam aliquid, totam
-                    saepe</p>
-                <a class="btn btn-primary btn-ig" role="button" href="/register">Give Blood</a>
-                <a class="btn btn-primary btn-ig" role="button" href="/listofdonors">Need Blood</a>
-            </div>
-        </div>
-    </div>
-
-    <hr> <!-- Horizontal line -->
-
-    <div class="container mt-4">
+       <div class="container mt-4">
         <div class="row">
             <div class="col-md-6">
     <h2>Find Blood Donors</h2>
@@ -111,103 +95,49 @@
         </div>
     </div>
 
-    <hr> <!-- Horizontal line -->
-
     <div class="container mt-4">
-        <h4>Another Section</h4>
-        <p>Lorem ipsum dol or sit, amet consectetur adipisicing elit. Deleniti harum eum beatae dicta doloremque. Rem molestiae omnis veritatis maxime quibusdam doloribus nam laborum, rerum delectus, totam quam? Assumenda, accusantium sint!</p>
-            <div class="container mt-4">
+        <h4>Blood Donors</h4>
         <div class="row">
-            <div class="col-md-6">
-                <img src="https://via.placeholder.com/400" alt="Image" class="img-fluid">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Donor 1</h5>
+                        <p class="card-text">Blood Type: O+</p>
+                        <p class="card-text">City: Manila</p>
+                        <p class="card-text">District: Sample District</p>
+                        <p class="card-text">Barangay: Sample Barangay</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
-                <h5>Project Overview</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus excepturi sint, quisquam aliquid, totam
-                    saepe</p>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Donor 2</h5>
+                        <p class="card-text">Blood Type: A-</p>
+                        <p class="card-text">City: Quezon City</p>
+                        <p class="card-text">District: Sample District</p>
+                        <p class="card-text">Barangay: Sample Barangay</p>
+                    </div>
+                </div>
             </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Donor 3</h5>
+                        <p class="card-text">Blood Type: B+</p>
+                        <p class="card-text">City: Makati</p>
+                        <p class="card-text">District: Sample District</p>
+                        <p class="card-text">Barangay: Sample Barangay</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-3">
+            <button class="btn btn-primary">Next</button>
         </div>
     </div>
 
-    <hr> <!-- Horizontal line -->
-
-    <div class="container mt-4">
-        <h4>Useful info / FAQS</h4>
-        <p>Lorem ipsum dol or sit, amet consectetur adipisicing elit. Deleniti harum eum beatae dicta doloremque. Rem molestiae omnis veritatis maxime quibusdam doloribus nam laborum, rerum delectus, totam quam? Assumenda, accusantium sint!</p>
-        
-       <div class="container mt-4">
-    <div class="row">
-        <div class="col-md-6">
-            <button class="btn btn-primary btn-block mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                Button 1
-            </button>
-            <div class="collapse" id="collapse1">
-                <div class="card card-body">
-                    Content for Button 1
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <button class="btn btn-primary btn-block mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                Button 2
-            </button>
-            <div class="collapse" id="collapse2">
-                <div class="card card-body">
-                    Content for Button 2
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <button class="btn btn-primary btn-block mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                Button 3
-            </button>
-            <div class="collapse" id="collapse3">
-                <div class="card card-body">
-                    Content for Button 3
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <button class="btn btn-primary btn-block mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                Button 4
-            </button>
-            <div class="collapse" id="collapse4">
-                <div class="card card-body">
-                    Content for Button 4
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <button class="btn btn-primary btn-block mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                qweqwewqewq
-            </button>
-            <div class="collapse" id="collapse5">
-                <div class="card card-body">
-                    Content for Button 5
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <button class="btn btn-primary btn-block mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
-                Button 6
-            </button>
-            <div class="collapse" id="collapse6">
-                <div class="card card-body">
-                    Content for Button 6
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-    </div>
-
-    <hr> <!-- Horizontal line -->
-
+    
         <div class="container mt-4">
         <h4>Donor Statistics</h4>
         <div class="row">
@@ -292,7 +222,7 @@
         </div>
 
 
-<footer class="footer bg-dark text-white py-4">
+    <footer class="footer bg-dark text-white py-4">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -310,7 +240,7 @@
             </div>
         </div>
     </div>
-</footer>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

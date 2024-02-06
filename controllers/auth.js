@@ -9,14 +9,15 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 });
 
+
+
 exports.login = (req, res) => {
     console.log(req.body);
 
     const { email, password } = req.body;
-
+    db.query('UPDATE blooddonor SET isloggedin = 0 WHERE isloggedin = 1');
     db.query('SELECT * FROM blooddonor WHERE email = ?', [email], async (error, results) => {
         if (error) {
-            console.log(error);
             return res.render('login', {
                 message: 'Something went wrong.'
             });
@@ -27,13 +28,24 @@ exports.login = (req, res) => {
                 message: 'Email not found.'
             });
         }
-
+        // console.log("result",results)
         const user = results[0];
         const isValidPassword = await bcrypt.compare(password, user.password);
 
         if (isValidPassword) {
-            return res.render('login', {
-                message: 'Successfully logged in.'
+            //update creds is_login = 1
+            db.query('UPDATE blooddonor SET isloggedin = 1 WHERE email = ?', [user.email]);
+          
+        //    const donor_stats = db.query('SELECT * FROM blooddonor WHERE email = ?', [user.email]);
+
+        //    console.log("here",donor_stats,donor_stats[0]);
+            console.log(user.bloodGroup);
+
+            return res.render('index', {
+                username: user.email,
+                myaccount: 'My Account',
+                message: 'Successfully logged in.',
+                // donor_stats_data:donor_stats
             });
         } else {
             return res.render('login', {
@@ -43,10 +55,29 @@ exports.login = (req, res) => {
     });
 };
 
+// exports.index = (req, res) => {
+//     console.log(req.body);
+
+//     db.query('SELECT * FROM blooddonor WHERE stat = 1', async (error, results) => {
+//         if (error) {
+//             console.log(error);
+//             return res.render('login', {
+//                 message: 'Something went wrong.'
+//             });
+//         }
+
+//         if (results.length > 0) {
+//             return res.render('index', {
+//                 user: 'archer'
+//             });
+//         }
+//     });
+// };
+
 exports.register = (req, res) => {
     console.log(req.body);
 
-    const { email, password, passwordConfirm } = req.body; //distructuring
+    const { email, password, passwordConfirm, BloodType, city, district, barangay, phonenumber, isloggedin } = req.body; //distructuring
 
     db.query('SELECT email FROM blooddonor WHERE email = ?', [email], async (error, results) => {
 
@@ -70,7 +101,7 @@ exports.register = (req, res) => {
 
         console.log(hashedPassword);
         
-        db.query('INSERT INTO blooddonor SET ? ', {email: email , password: hashedPassword}, (error, results) =>
+        db.query('INSERT INTO blooddonor SET ? ', {email: email , password: hashedPassword, bloodGroup: BloodType, city: city, district: district, barangay: barangay, phonenumber: phonenumber}, (error, results) =>
         {
             if(error){
                 console.log(error);

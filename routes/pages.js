@@ -11,7 +11,22 @@ router.get('/login', (req , res) => {
 });
 
 router.get('/register', (req , res) => {
-    res.render('register');
+    res.render('register') ;
+});
+
+router.get('/listofdonors', (req , res) => {
+    res.render('listofdonors'
+    
+    );
+});
+
+router.get('/Aboutus', (req , res) => {
+    res.render('Aboutus');
+});
+
+
+router.get('/contact', (req , res) => {
+    res.render('contact');
 });
 
 

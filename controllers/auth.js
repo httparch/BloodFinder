@@ -2,14 +2,13 @@ const mysql = require("mysql");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
+
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE
 });
-
-
 
 exports.login = (req, res) => {
     console.log(req.body);
@@ -49,30 +48,11 @@ exports.login = (req, res) => {
             });
         } else {
             return res.render('login', {
-                message: 'Wrong credentials.'
+                message: 'Wrong password.'
             });
         }
     });
 };
-
-// exports.index = (req, res) => {
-//     console.log(req.body);
-
-//     db.query('SELECT * FROM blooddonor WHERE stat = 1', async (error, results) => {
-//         if (error) {
-//             console.log(error);
-//             return res.render('login', {
-//                 message: 'Something went wrong.'
-//             });
-//         }
-
-//         if (results.length > 0) {
-//             return res.render('index', {
-//                 user: 'archer'
-//             });
-//         }
-//     });
-// };
 
 exports.register = (req, res) => {
     console.log(req.body);
@@ -116,38 +96,32 @@ exports.register = (req, res) => {
         })
     });
 }
+//SELECT phonenumber,bloodGroup, city, district ,barangay FROM blooddonor WHERE city = ? AND district = ? AND barangay = ?
+exports.find = (req, res) => {
 
-// exports.isLoggedIn = async (req, res, next) => {
-//     if (req.cookies.userSave) {
-//         try {
-//             // 1. Verify the token
-//             const decoded = await promisify(jwt.verify)(req.cookies.userSave,
-//                 process.env.JWT_SECRET
-//             );
-//             console.log(decoded);
+    const { bloodType, city, district, barangay} = req.query;
+    console.log('value', req.query);
+    let finder;
 
-//             // 2. Check if the user still exist
-//             db.query('SELECT * FROM users WHERE id = ?', [decoded.id], (err, results) => {
-//                 console.log(results);
-//                 if (!results) {
-//                     return next();
-//                 }
-//                 req.user = results[0];
-//                 return next();
-//             });
-//         } catch (err) {
-//             console.log(err)
-//             return next();
-//         }
-//     } else {
-//         next();
-//     }
-// }
+    db.query('SELECT phonenumber,bloodGroup, city, district ,barangay FROM blooddonor WHERE bloodGroup = ? AND city = ? AND district = ? AND barangay = ?',[bloodType,city,district,barangay], async (error, results) => {
+        if(error){
+            console.log(error);
+        }
 
-// exports.logout = (req, res) => {
-//     res.cookie('userSave', 'logout', {
-//         expires: new Date(Date.now() + 2 * 1000),
-//         httpOnly: true
-//     });
-//     res.status(200).redirect("/");
-// }
+        finder = results;
+        console.log(results);
+
+        if(results.length > 0){
+            return res.render('listofdonors', {
+                blooddonors: finder
+            });
+        }
+        // } else if(password !== passwordConfirm){
+        //     return res.render('register', {
+        //         message: 'Passwords do not match.'
+        //     });
+        // }
+
+    })
+
+}

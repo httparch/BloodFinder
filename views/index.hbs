@@ -41,18 +41,23 @@
             </div>
             <div class="d-flex flex-column">
                     {{#if username}}
-                    <a class="btn btn-primary btn-ig mb-2" href="/register">{{username}}</a>
+
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{username}}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/login">Logout</a></li>
+                                <li><a class="dropdown-item" href="/myaccount">My Account</a></li>
+                            </ul>
+                        </div>
+                    {{!-- <a class="btn btn-primary btn-ig mb-2" href="/register"></a> --}}
             
                 {{else}}
                 <a class="btn btn-primary btn-ig mb-2" href="/register">Give Blood</a>
+                <a class="nav-link" href="/login">Login</a>
             {{/if}}
 
-                 {{#if myaccount}}
-                  <a class="nav-link" href="/login">{{myaccount}}</a>
-          
-            {{else}}
-            <a class="nav-link" href="/login">Login</a>
-        {{/if}}
             </div>
         </div>
     </nav>
@@ -82,22 +87,22 @@
         <div class="row">
             <div class="col-md-6">
     <h2>Find Blood Donors</h2>
-    <form>
+       <form action="/listofdonors" method="GET">
         <div class="mb-3">
             <label for="bloodType" class="form-label">Blood Type</label>
-            <input type="text" class="form-control" id="bloodType" placeholder="Enter your blood type">
+            <input type="text" class="form-control" id="bloodType" name="bloodType" placeholder="Enter your blood type" required>
         </div>
         <div class="mb-3">
             <label for="city" class="form-label">City</label>
-            <input type="text" class="form-control" id="city" placeholder="Enter your city">
+            <input type="text" class="form-control" id="city" name="city" placeholder="Enter your city" required> 
         </div>
         <div class="mb-3">
             <label for="district" class="form-label">District</label>
-            <input type="text" class="form-control" id="district" placeholder="Enter your district">
+            <input type="text" class="form-control" id="district" name="district" placeholder="Enter your district" required>
         </div>
         <div class="mb-3">
             <label for="barangay" class="form-label">Barangay</label>
-            <input type="text" class="form-control" id="barangay" placeholder="Enter your barangay">
+            <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter your barangay" required>
         </div>
         <button type="submit" class="btn btn-primary">Find Donors</button>
     </form>
@@ -208,87 +213,20 @@
 
     <hr> <!-- Horizontal line -->
 
-        <div class="container mt-4">
+    <div class="container mt-4">
         <h4>Donor Statistics</h4>
+
         <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4">
+            {{#each donorstatistics}} 
+            <div class="col-md-3">
+                <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">Statistic 1</h5>
-                        <p class="card-text">Content for Statistic 1</p>
+                        <h5 class="card-title">{{this.bloodGroup}}</h5>
+                        <p class="card-text">{{this.tot}}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Statistic 2</h5>
-                        <p class="card-text">Content for Statistic 2</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Statistic 3</h5>
-                        <p class="card-text">Content for Statistic 3</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Statistic 4</h5>
-                        <p class="card-text">Content for Statistic 4</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Statistic 5</h5>
-                        <p class="card-text">Content for Statistic 5</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Statistic 6</h5>
-                        <p class="card-text">Content for Statistic 6</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Statistic 7</h5>
-                        <p class="card-text">Content for Statistic 7</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Statistic 8</h5>
-                        <p class="card-text">Content for Statistic 8</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Statistic 9</h5>
-                        <p class="card-text">Content for Statistic 9</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            {{/each}}
         </div>
 
 

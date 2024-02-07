@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const mysql = require("mysql");
 const dotenv = require('dotenv');
+const exphbs = require('express-handlebars');
+
 
 dotenv.config({path:'./.env'})
 
@@ -23,6 +25,8 @@ app.use(express.urlencoded({ extended: false})); //parse URL-encoded bodies (as 
 
 app.use(express.json());//parse json bodies (as sent by API clients)
 
+app.engine('hbs', exphbs.engine({extname: '.hbs', defaultLayout: false}));
+
 app.set('view engine', 'hbs');
 
 db.connect( (error) => {
@@ -38,6 +42,7 @@ db.connect( (error) => {
 app.use('/', require('./routes/pages')) //checks route folder
 app.use('/auth', require('./routes/auth')) //redirects to the auth file
 
-app.listen(3003, () => {
-    console.log("Server started on port 3003")
+app.listen(3006, () => {
+    console.log("Server started on port 3006")
 })
+

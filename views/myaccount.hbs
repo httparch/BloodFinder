@@ -1,1 +1,158 @@
-<h1>myaccount</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+        <link rel="stylesheet" href="/style.css">
+         <link rel="icon" href="favicon-32x32.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>BloodFinder</title>
+    <link rel="icon" href="https://i.pinimg.com/736x/3b/cd/36/3bcd36af290d916f6b50b7db7e6e9f30.jpg">
+</head>
+
+<body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container mx-auto" style="max-width: 800px;">
+            <h4 class="navbar-brand" id="title">BloodFinder</h4>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/listofdonors">List of Donors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Aboutus">Team</a>
+                    </li>
+                </ul>
+                <div class="d-flex flex-column">
+                    {{#if username}}
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle red-dropdown" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{username}}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/login">Logout</a></li>
+                            <li><a class="dropdown-item" href="/myaccount">My Account</a></li>
+                        </ul>
+                    </div>
+                    {{else}}
+                     <div class="contain">
+                <a class="btn btn-primary btn-ig mb-2" href="/register">Give Blood</a>
+                <a class="nav-link" href="/login">Login</a>
+                </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+            <form action="/auth/myaccount" method="POST">
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" placeholder="Enter city" name="city" value={{city}}>
+            </div>
+            <div class="mb-3">
+                <label for="district" class="form-label">District</label>
+                <input type="text" class="form-control" id="district" placeholder="Enter district" name="district" value={{district}}>
+            </div>
+            <div class="mb-3">
+                <label for="barangay" class="form-label">Barangay</label>
+                <input type="text" class="form-control" id="barangay" placeholder="Enter barangay" name="barangay" value={{barangay}}>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" value={{username}}>
+            </div>          
+            <div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Change my password
+                </button>
+
+            </div>
+                <div class="mt-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault"><strong>I am ready to give!</strong></label>
+                        <small>If for some reason you are unable to donate blood, you can deactivate this option and you will not be shown in the search results, you can of course reactivate it at any time</small>
+                    </div>
+                </div>
+            <div class="mt-3">
+                 <button type="submit" class="btn btn-primary d-block mx-auto">Save</button>
+            </div>  
+                </form>
+            </div>
+        </div>
+    </div>
+
+       <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Change password</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="cpassword" class="form-label">Current Password</label>
+                                    <input type="text" class="form-control" id="cpassword" name="cpassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="npassword" class="form-label">New Password</label>
+                                    <input type="text" class="form-control" id="npassword"  name="npassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="rpassword" class="form-label">Re-enter Password</label>
+                                    <input type="text" class="form-control" id="rpassword"  name="rpassword">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                     {{#if message}}
+            <h4 class="alert alert-success mt-4">{{message}}</h4>
+        {{/if}}
+         </div>
+
+        
+
+    <footer class="footer bg-dark text-white py-4">
+    <div class="container d-flex justify-content-between">
+        <div class="col-md-6">
+            <h5><p>&copy; 2024: Designed by <span class="designer">Group 4</span></p></h5>
+            <h9>WEB DEVELOPMENT PROJECT</h9>
+        </div>
+        <div class="col-md-6 text-end">
+            <h5>Follow Us</h5>
+            <ul class="list-unstyled">
+               <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+                <a href=""><i class="fa-brands fa-twitter"></i></a>
+                <a href=""><i class="fa-brands fa-youtube"></i></a>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

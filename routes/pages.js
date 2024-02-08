@@ -57,7 +57,7 @@ router.get('/', (req , res) => {
 });
 
 router.get('/login', (req , res) => {
-    db.query('UPDATE blooddonor SET isloggedin = 0;');
+    db.query('UPDATE blooddonor SET isloggedin = 0 WHERE isloggedin = 1;');
     res.render('login');
 });
 
@@ -79,7 +79,6 @@ router.get('/listofdonors', (req, res) => {
         if(error){
             console.log(error);
         }
-
         finder = results;
         console.log(results);
 
@@ -111,7 +110,7 @@ router.get('/listofdonors', (req, res) => {
                 }
             
                 donorStats = results;
-                console.log('bloodonners',bloodDonors);
+                
                 console.log('finders', finder);
                 // Render the page after both queries have finisheds
                 res.render('listofdonors', {
@@ -125,23 +124,32 @@ router.get('/listofdonors', (req, res) => {
              
     });
 
- 
-
 });
 
-router.get('/Aboutus', (req , res) => {
-    res.render('Aboutus');
+router.get('/Aboutus', (req , res) => { 
+    res.render('Aboutus')
 });
 
 
 router.get('/contact', (req , res) => {
-    res.render('contact');
+    res.render('contact') 
 });
 
 router.get('/myaccount', (req, res) =>{
-    res.render('myaccount')
-});
 
+    let user;
+    db.query('SELECT * FROM blooddonor WHERE isloggedin = 1', async (error, results) =>{
+        
+        user = results[0];
+        
+        res.render('myaccount',{
+            username: user.email,
+            city: user.city,
+            district: user.district,
+            barangay: user.barangay,
+        })
+    })
+});
 
 module.exports = router;
 

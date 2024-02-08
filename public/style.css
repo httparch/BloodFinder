@@ -1,19 +1,31 @@
 .navbar {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
 }
 
 .navbar-brand {
     font-size: 1.5rem;
 }
 
+.outer{
+    margin-top: 50px
+}
+.contain{
+    margin-left: 30px;
+}
 .navbar-nav .nav-link {
     padding: 0.5rem 1rem;
+    padding: 10px;
     font-size: 1rem;
     color: #000;
 }
 
 .navbar-nav .nav-link:hover {
-    color: #007bff;
+    color: #dc3545;
+}
+
+.nav-link:hover{
+    color: #dc3545;
 }
 
 .btn-ig {
@@ -21,27 +33,21 @@
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #dc3545;
+    border-color: #dc3545;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: #e3919a;
+    border-color: #e3919a;
 }
 
 .btn-primary:active, .btn-primary:focus {
     box-shadow: none;
 }
 
-@media (max-width: 991.98px) {
-    .navbar-nav {
-        flex-direction: column;
-    }
-}
-
-.container {
-    max-width: 800px;
+.navbar-nav {
+    flex-direction: column;
 }
 
 .d-flex {
@@ -52,3 +58,41 @@
     flex-direction: column;
 }
 
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+    margin-bottom: 20px ;
+}
+
+.red-dropdown {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.navbar-nav .nav-item.active .nav-link {
+    color: red !important;
+}
+
+h4 {
+    color: #dc3545;
+    font-size: xx-large;
+}
+
+#head-title{
+    margin-bottom: 10px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+#title{
+    color: #dc3545;
+}

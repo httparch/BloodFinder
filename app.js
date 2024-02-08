@@ -21,6 +21,8 @@ const publicDirectory = path.join(__dirname, './public') //directory for js / cs
 
 app.use(express.static(publicDirectory));
 
+// app.use(express.static('public'));
+
 app.use(express.urlencoded({ extended: false})); //parse URL-encoded bodies (as sent by html forms)
 
 app.use(express.json());//parse json bodies (as sent by API clients)
@@ -41,6 +43,7 @@ db.connect( (error) => {
 //define routes
 app.use('/', require('./routes/pages')) //checks route folder
 app.use('/auth', require('./routes/auth')) //redirects to the auth file
+
 
 app.listen(3006, () => {
     console.log("Server started on port 3006")

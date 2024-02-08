@@ -69,7 +69,7 @@ exports.register = (req, res) => {
 
         if(results.length > 0){
             return res.render('register', {
-                message: 'That email is already in use.'
+                message: 'That email is already in use.',
             })
         } else if(password !== passwordConfirm){
             return res.render('register', {
@@ -93,35 +93,47 @@ exports.register = (req, res) => {
                 
             }
             
-        })
+        });
     });
 }
-//SELECT phonenumber,bloodGroup, city, district ,barangay FROM blooddonor WHERE city = ? AND district = ? AND barangay = ?
-exports.find = (req, res) => {
 
-    const { bloodType, city, district, barangay} = req.query;
-    console.log('value', req.query);
-    let finder;
+// exports.myaccount = (req, res) => {
+//     console.log(req.body);
+//     const { city, district, barangay, email} = req.body;
+//     let user;
+//     db.query('SELECT * FROM blooddonor WHERE email = ?', [email], async (error, results) => {
+        
+//         if(error){
+//             console.log(error);
+//         }
 
-    db.query('SELECT phonenumber,bloodGroup, city, district ,barangay FROM blooddonor WHERE bloodGroup = ? AND city = ? AND district = ? AND barangay = ?',[bloodType,city,district,barangay], async (error, results) => {
-        if(error){
-            console.log(error);
-        }
+//         // if(npassword !== rpassword){
+//         //     return res.render('myaccount', {
+//         //         message: 'Password do not match.'
+//         //     });
+//         // }
+//         // console.log(results[0]);
+//         // const user = results[0]; // get user password. walang password diyan sa results
+//         // const isValidPassword = await bcrypt.compare(cpassword, user.password);
 
-        finder = results;
-        console.log(results);
+//         // if (isValidPassword) {
+//         //     console.log(city, district, barangay, email, cpassword,npassword,rpassword  );
+//             //update creds is_login = 1
+//             db.query('UPDATE blooddonor SET ? WHERE isloggedin = 1', {city: city, district: district, barangay: barangay, email:email});
 
-        if(results.length > 0){
-            return res.render('listofdonors', {
-                blooddonors: finder
-            });
-        }
-        // } else if(password !== passwordConfirm){
-        //     return res.render('register', {
-        //         message: 'Passwords do not match.'
-        //     });
-        // }
+//             return res.render('myaccount', {
+//                 message: 'Profile updated!',
+//                 username: user.email,
+//                 city: user.city,
+//                 district: user.district,
+//                 barangay: user.barangay
+//             });
 
-    })
+//         // } else {
+//         //     return res.render('myaccount', {
+//         //         message: 'Unsuccessful!.'
+//         //     });
+//         // }
+//     });
+// }
 
-}
